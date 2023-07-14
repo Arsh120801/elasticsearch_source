@@ -1,3 +1,6 @@
+/*Importing firestore details from firebaseConfig.js
+And importing firestore so that we can fetch the fiestore collection data from it*/
+
 const firebase = require('firebase');
 const firebaseConfig = require('./firebaseConfig');
 firebase.initializeApp(firebaseConfig);
@@ -13,6 +16,9 @@ const app = express();
 
 app.use(express.json())
 app.use(cors())
+
+/* Just creating IndexName and esClient, will fetch cloudId and ApiKey 
+from '/export' request body to set esClient and will fetch indecName as well*/
 
 let esClient;
 let indexName;
@@ -54,6 +60,8 @@ async function exportData() {
           timestamp: moment(docData.reqtime, 'DD/MM/YYYY, hh:mm:ss.SSS a').toISOString()
           
         };
+
+        // index is basically a elasticsearch data store, this will store the data from firestore's collection
         bulkBody.push({ index: { _index: indexName , _id: doc.id } });
         bulkBody.push(transformedData);
       });
@@ -83,6 +91,8 @@ app.post('/export', async (req, res) => {
   // Initialize Elasticsearch client
     esClient = new Client({
 
+  /*cloud and auth we have to set to connect this code with elastic search
+  The cloudId and apikey can be collected from elasticsearch cloud deployment*/
     cloud:{id:cloudId},
     auth:{apiKey:apiKey}
 

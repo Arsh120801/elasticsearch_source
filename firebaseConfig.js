@@ -1,3 +1,17 @@
+//The .env file is uploaded in hosting platform.
+
+/* Example for .env file
+
+    apiKey="apikey from firebase"
+    authDomain="projectID.firebaseapp.com"
+    projectId="Your Firebase Projet ID"
+    storageBucket="projectID.appspot.com"
+    messagingSenderId="unique number from firebase"
+    appId="1:messagingSenderId:web:75399abc2413fa54ea4211"
+    measurementId="measurementId From Firebase"
+    
+ */
+
 require('dotenv').config(); // Load environment variables from .env file
 
 const firebaseConfig = {
